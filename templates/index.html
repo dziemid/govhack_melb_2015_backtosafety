@@ -35,13 +35,6 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   <li>
-                      <div class="btn-group" role="group" aria-label="emergencybuttons">
-                          <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
-                          <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
-                          <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
-                      </div>
-                  </li>
-                  <li>
                       <div class="dropdown">
                       <button type="button" class="btn btn-default navbar-btn dropdown-toggle" id="filterDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                           <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter 
@@ -53,6 +46,14 @@
                           <li><a href="#">Something else here</a></li>
                           <li><a href="#">Separated link</a></li>
                       </ul>
+                      </div>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                      <div class="btn-group" role="group" aria-label="emergencybuttons">
+                          <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
+                          <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
+                          <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
                       </div>
                   </li>
               </ul>
