@@ -35,9 +35,9 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                   <li><div class="btn-group" role="group" aria-label="emergencybuttons">
-                  <button type="button" class="btn btn-success navbar-btn" onclick="navigator.geolocation.getCurrentPosition(addSafePoint)">I'm feeling SAFE!</button>
-                  <button type="button" class="btn btn-warning navbar-btn" onclick="navigator.geolocation.getCurrentPosition(addDangerPoint)">I'm feeling UNSAFE!</button>
-                  <button type="button" class="btn btn-danger navbar-btn" onclick="navigator.geolocation.getCurrentPosition(addEmergencyPoint)">EMERGENCY! HELP!</button>
+                          <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
+                          <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
+                          <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
                   </li></div>
               </ul>
             </div><!--/.nav-collapse -->
