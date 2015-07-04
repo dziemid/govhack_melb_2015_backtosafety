@@ -38,7 +38,19 @@
                           <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
                           <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
                           <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
-                  </li></div>
+                      </div>
+                  </li>
+                  <li>
+                      <div class="dropdown">
+                      <button type="button" class="btn btn-default btn-lg dropdown-toggle" id="filterDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter </button>
+                      <ul class="dropdown-menu" aria-labelledby="filterDropDownMenu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li><a href="#">Separated link</a></li>
+                      </ul>
+                      </div>
+                  </li>
               </ul>
             </div><!--/.nav-collapse -->
           </div>
