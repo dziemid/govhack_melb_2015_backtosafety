@@ -11,7 +11,7 @@
 			    color: white;
 			}
 
-			</style>
+        </style>
 	</head>
 	<body>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -21,14 +21,11 @@
 
 <div class="col-md-6"><h1>Path To Safety by Community Nexus</h1></div>
 
-<p></p>
+<br>
 <button type="button" class="btn btn-success" onclick="navigator.geolocation.getCurrentPosition(addSafePoint)">I'm feeling SAFE!</button>
 <button type="button" class="btn btn-warning" onclick="navigator.geolocation.getCurrentPosition(addDangerPoint)">I'm feeling UNSAFE!</button>
 <button type="button" class="btn btn-danger" onclick="navigator.geolocation.getCurrentPosition(addEmergencyPoint)">EMERGENCY! HELP!</button>
-<button type="button" class="btn btn-default" onclick="navigator.geolocation.getCurrentPosition(addSafePoint)">I'm feeling SAFE!</button>
-   <button onclick="navigator.geolocation.getCurrentPosition(addDangerPoint)">I'm feeling UNSAFE!</button>
-   <button type="button" class="btn btn-success">Submit</button>
-<p></p>
+<br>
 
 
 <div id="map"></div>
@@ -85,19 +82,19 @@ window.onload = function() {
     // map.setZoom(3);
     // map.panTo([50.5, 30.5]);
 
-  function showPosition(position) {
-    var my_location = new L.marker([position.coords.latitude,position.coords.longitude]).addTo(map);
-    socket.emit('user_click', 
-      { pos: [position.coords.latitude,position.coords.longitude], id: socket.id }  
-      );
-  }
+function showPosition(position) {
+var my_location = new L.marker([position.coords.latitude,position.coords.longitude]).addTo(map);
+socket.emit('user_click', 
+  { pos: [position.coords.latitude,position.coords.longitude], id: socket.id }  
+  );
+}
   
-  function addSafePoint(position) {
-	var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
-		color: 'green',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(map);
+function addSafePoint(position) {
+var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
+    color: 'green',
+    fillColor: '#f03',
+    fillOpacity: 0.5
+}).addTo(map);
 }
 
 function addDangerPoint(position) {
@@ -116,23 +113,23 @@ function addEmergencyPoint(position) {
 	}).addTo(map);
 }
 
-    var x = document.getElementById("demo");
-  
-  function getLocation() {
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition, 
-    function(error){
-         alert(error.message);
-    }, {
-             enableHighAccuracy: true
-              ,timeout : 25000
-    });
-      } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-  }
-  
-    getLocation();
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, 
+            function(error){
+                alert(error.message);
+            }, {
+                enableHighAccuracy: true
+                ,timeout : 25000
+        });
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+getLocation();
 
   });
 
@@ -144,7 +141,7 @@ function addEmergencyPoint(position) {
 
  function featureOver(e, latlng, pos, data) {
           console.log(data.cartodb_id)
-        }
+ }
 
 
 
