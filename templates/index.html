@@ -34,7 +34,8 @@
                 <li><a href="#contact">Feedback</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                  <li><div class="btn-group" role="group" aria-label="emergencybuttons">
+                  <li>
+                      <div class="btn-group" role="group" aria-label="emergencybuttons">
                           <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
                           <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
                           <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
@@ -42,7 +43,10 @@
                   </li>
                   <li>
                       <div class="dropdown">
-                      <button type="button" class="btn btn-default navbar-btn dropdown-toggle" id="filterDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter </button>
+                      <button type="button" class="btn btn-default navbar-btn dropdown-toggle" id="filterDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter 
+                          <span class="caret"></span>
+                      </button>
                       <ul class="dropdown-menu" aria-labelledby="filterDropDownMenu">
                           <li><a href="#">Action</a></li>
                           <li><a href="#">Another action</a></li>
