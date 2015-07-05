@@ -1,89 +1,89 @@
 <html>
-	<head>
-		<link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 
-		<link href="static/css/bootstrap.min.css" rel="stylesheet">
-        	<!-- <link href="static/css/styles.css" rel="stylesheet"> -->
-        	
-		<style>
-			body {
-			    background-color: black;
-			    color: white;
-                padding-top: 50px;
-                padding-left: 0px;
-                padding-right: 0px;
-			}
-        </style>
-	</head>
-	<body>
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link href="static/css/styles.css" rel="stylesheet"> -->
+  
+  <style>
+  body {
+   background-color: black;
+   color: white;
+   padding-top: 50px;
+   padding-left: 0px;
+   padding-right: 0px;
+ }
+ </style>
+</head>
+<body>
 
-    <!-- Fixed navbar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">Path to Safety</a>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Path to Safety</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Map</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <div class="btn-group" role="group" aria-label="emergencybuttons">
+              <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
+              <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
+              <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Map</a></li>
-                <li><a href="#about">About</a></li>
+          </li>
+          <li> &nbsp&nbsp </li>
+          <li>
+            <div class="dropdown">
+              <button type="button" class="btn btn-default navbar-btn dropdown-toggle" id="filterDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter 
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="filterDropDownMenu">
+                <div class="checkbox">
+                  <label><input type="checkbox" value="streetlights">Show Street Light</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="businesshours">Show Business open hours</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="mainroads">Show Main roads</label>
+                </div>
               </ul>
-              <ul class="nav navbar-nav navbar-right">
-                  <li>
-                      <div class="btn-group" role="group" aria-label="emergencybuttons">
-                          <button type="button" class="btn btn-success navbar-btn" onclick="addSafePoint(navigator.geolocation.getCurrentPosition())">I'm feeling SAFE!</button>
-                          <button type="button" class="btn btn-warning navbar-btn" onclick="addDangerPoint(navigator.geolocation.getCurrentPosition())">I'm feeling UNSAFE!</button>
-                          <button type="button" class="btn btn-danger navbar-btn" onclick="addEmergencyPoint(navigator.geolocation.getCurrentPosition())">EMERGENCY! HELP!</button>
-                      </div>
-                  </li>
-                  <li> &nbsp&nbsp </li>
-                  <li>
-                      <div class="dropdown">
-                      <button type="button" class="btn btn-default navbar-btn dropdown-toggle" id="filterDropDownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                          <span class="glyphicon glyphicon-filter" aria-hidden="true"></span> Filter 
-                          <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="filterDropDownMenu">
-                          <div class="checkbox">
-                              <label><input type="checkbox" value="streetlights">Show Street Light</label>
-                          </div>
-                          <div class="checkbox">
-                              <label><input type="checkbox" value="businesshours">Show Business open hours</label>
-                          </div>
-                          <div class="checkbox">
-                              <label><input type="checkbox" value="mainroads">Show Main roads</label>
-                          </div>
-                      </ul>
-                      </div>
-                  </li>
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div>
-        </nav>
+            </div>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
 
-        <div class="container col-md-12">
-            <!-- <div class="col&#45;md&#45;12"><h1></h1></div> -->
-            <div id="map"></div>
-        </div>
+  <div class="container col-md-12">
+    <!-- <div class="col&#45;md&#45;12"><h1></h1></div> -->
+    <div id="map"></div>
+  </div>
 
         <!-- Bootstrap core JavaScript
-            ================================================== -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<script src="static/js/bootstrap.js"></script>
-	</body>	
-</html>
+        ================================================== -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="static/js/bootstrap.js"></script>
+      </body>	
+      </html>
 
 
-<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+      <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 
-<script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-<script>
+      <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+      <script>
 // get the viz.json url from the CartoDB Editor
 // - click on visualize
 // - create new visualization
@@ -104,18 +104,18 @@ window.onload = function() {
     // when setInteraction is disabled featureOver is triggered
     layers[1].setInteraction(true);
 
-  var map = vis.getNativeMap();
-  targetMarker = new L.marker([0,0]).addTo(map);
+    var map = vis.getNativeMap();
+    targetMarker = new L.marker([0,0]).addTo(map);
 
     layers[1].on('featureClick', function(e, latlng, pos, data, layerNumber) {
       targetMarker.setLatLng(latlng);
       socket.emit('user_click', { pos: latlng, id: socket.id } );
     });
 
-     socket.on('user_click', function(msg){
+    socket.on('user_click', function(msg){
       console.log("socket!!");
       if (peers[msg.id]) {
-      peers[msg.id].setLatLng(msg.pos);
+        peers[msg.id].setLatLng(msg.pos);
       } else {
         peers[msg.id] = new L.marker(msg.pos);
         peers[msg.id].addTo(map);
@@ -131,66 +131,66 @@ window.onload = function() {
     // map.setZoom(3);
     // map.panTo([50.5, 30.5]);
 
-function showPosition(position) {
-var my_location = new L.marker([position.coords.latitude,position.coords.longitude]).addTo(map);
-socket.emit('user_click', 
-  { pos: [position.coords.latitude,position.coords.longitude], id: socket.id }  
-  );
-}
-  
-function addSafePoint(position) {
-var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
-    color: 'green',
-    fillColor: '#f03',
-    fillOpacity: 0.5
-}).addTo(map);
-}
+    function showPosition(position) {
+      var my_location = new L.marker([position.coords.latitude,position.coords.longitude]).addTo(map);
+      socket.emit('user_click', 
+        { pos: [position.coords.latitude,position.coords.longitude], id: socket.id }  
+        );
+    }
+    
+    function addSafePoint(position) {
+      var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
+        color: 'green',
+        fillColor: '#f03',
+        fillOpacity: 0.5
+      }).addTo(map);
+    }
 
-function addDangerPoint(position) {
-	var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.5
-	}).addTo(map);
-}
+    function addDangerPoint(position) {
+     var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5
+    }).addTo(map);
+   }
 
-function addEmergencyPoint(position) {
-	var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 300, {
-		color: 'red',
-		fillColor: '#f03',
-		fillOpacity: 0.7
-	}).addTo(map);
-}
+   function addEmergencyPoint(position) {
+     var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 300, {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.7
+    }).addTo(map);
+   }
 
-var x = document.getElementById("demo");
+   var x = document.getElementById("demo");
 
-function getLocation() {
+   function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, 
-            function(error){
-                alert(error.message);
-            }, {
-                enableHighAccuracy: true
-                ,timeout : 25000
+      navigator.geolocation.getCurrentPosition(showPosition, 
+        function(error){
+          alert(error.message);
+        }, {
+          enableHighAccuracy: true
+          ,timeout : 25000
         });
     } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+      x.innerHTML = "Geolocation is not supported by this browser.";
     }
+  }
+
+  getLocation();
+
+});
+
+
+
 }
 
-getLocation();
-
-  });
 
 
-
+function featureOver(e, latlng, pos, data) {
+  console.log(data.cartodb_id)
 }
-
-
-
- function featureOver(e, latlng, pos, data) {
-          console.log(data.cartodb_id)
- }
 
 
 
