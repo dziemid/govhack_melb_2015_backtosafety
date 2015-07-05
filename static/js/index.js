@@ -6,6 +6,18 @@ var howIfeel = null;
 
 var peers = {};
 
+var showLocationFeel = function(latlng, feeling) {
+  if (feeling == 'safe') {
+          addSafePoint(latlng);
+      };
+  if (feeling == 'unsafe') {
+      addDangerPoint(latlng);
+  };
+  if (feeling == 'emergency') {
+      addEmergencyPoint(latlng);
+  }
+}
+
 window.onload = function() {
   cartodb.createVis('map', 'https://gdziemidowicz.cartodb.com/api/v2/viz/2ebe7fe6-21d6-11e5-ac0c-0e853d047bba/viz.json')
   .done(function(vis, layers) {
@@ -16,16 +28,8 @@ window.onload = function() {
 
     layers[1].on('featureClick', function(e, latlng, pos, data, layerNumber) {
       targetMarker.setLatLng(latlng);
-      if (howIfeel == 'safe') {
-          addSafePoint(latlng);
-      };
-      if (howIfeel == 'unsafe') {
-          addDangerPoint(latlng);
-      };
-      if (howIfeel == 'emergency') {
-          addEmergencyPoint(latlng);
-      }
-      socket.emit('user_click', { pos: latlng, id: socket.id } );
+      showLocationFeel(latlng, howIfeel);
+      socket.emit('user_click', { pos: latlng, id: socket.id, feeling: howIfeel} );
     });
 
     socket.on('user_click', function(msg){
@@ -35,6 +39,7 @@ window.onload = function() {
         peers[msg.id] = new L.marker(msg.pos);
         peers[msg.id].addTo(map);
       }
+      showLocationFeel(msg.pos, msg.feeling);
     });
 
     function showPosition(position) {
