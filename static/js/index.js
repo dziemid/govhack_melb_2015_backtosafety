@@ -132,7 +132,7 @@
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, 
           function(error){
-            alert(error.message);
+            console.log(error.message);
           }, {
             enableHighAccuracy: true
             ,timeout : 25000
