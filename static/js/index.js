@@ -1,10 +1,3 @@
-// get the viz.json url from the CartoDB Editor
-// - click on visualize
-// - create new visualization
-// - make visualization public
-// - click on publish
-// - go to API tab
-
 var newMarker = null;
 var targetMarker = null;
 var socket = io.connect('http://govhack2015.gregdmd.com');
@@ -14,8 +7,6 @@ var peers = {};
 window.onload = function() {
   cartodb.createVis('map', 'https://gdziemidowicz.cartodb.com/api/v2/viz/2ebe7fe6-21d6-11e5-ac0c-0e853d047bba/viz.json')
   .done(function(vis, layers) {
-    // layer 0 is the base layer, layer 1 is cartodb layer
-    // when setInteraction is disabled featureOver is triggered
     layers[1].setInteraction(true);
 
     var map = vis.getNativeMap();
@@ -36,19 +27,15 @@ window.onload = function() {
       }
     });
 
-    // you can get the native map to work with it
-    
-
-    console.log("native map", map)
-
-    // now, perform any operations you need, e.g. assuming map is a L.Map object:
-    // map.setZoom(3);
-    // map.panTo([50.5, 30.5]);
-
     function showPosition(position) {
-      var my_location = new L.marker([position.coords.latitude,position.coords.longitude]).addTo(map);
+      var pos = [position.coords.latitude,position.coords.longitude];
+      var my_location = new L.marker(pos).addTo(map);
+
+      map.setZoom(13);
+      map.panTo(pos);
+
       socket.emit('user_click', 
-        { pos: [position.coords.latitude,position.coords.longitude], id: socket.id }  
+        { pos: pos, id: socket.id }  
         );
     }
     
@@ -99,11 +86,5 @@ window.onload = function() {
 
 
 
-}
-
-
-
-function featureOver(e, latlng, pos, data) {
-  console.log(data.cartodb_id)
 }
 
