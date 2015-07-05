@@ -38,9 +38,9 @@
         <ul class="nav navbar-nav navbar-right">
           <li>
             <div class="btn-group" role="group" aria-label="emergencybuttons">
-              <button type="button" class="btn btn-success navbar-btn" onclick="navigator.geolocation.getCurrentPosition(feelingSafe)">I'm feeling SAFE!</button>
-              <button type="button" class="btn btn-warning navbar-btn" onclick="navigator.geolocation.getCurrentPosition(feelingUnsafe)">I'm feeling UNSAFE!</button>
-              <button type="button" class="btn btn-danger navbar-btn" onclick="navigator.geolocation.getCurrentPosition(feelingInEmergency)">EMERGENCY! HELP!</button>
+              <button type="button" class="btn btn-success navbar-btn" onclick="requestLocation(feelingSafe)">I'm feeling SAFE!</button>
+              <button type="button" class="btn btn-warning navbar-btn" onclick="requestLocation(feelingUnsafe)">I'm feeling UNSAFE!</button>
+              <button type="button" class="btn btn-danger navbar-btn" onclick="requestLocation(feelingInEmergency)">EMERGENCY! HELP!</button>
             </div>
           </li>
           <li> &nbsp&nbsp </li>

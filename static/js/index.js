@@ -65,6 +65,10 @@
           );
       }
 
+      window.requestLocation = function(fun) {
+        navigator.geolocation.getCurrentPosition(fun);
+      }
+
       window.feelingSafe = function(position) {
         feelingClickHandler('safe', position, addSafePoint)
       };
@@ -86,10 +90,10 @@
 
       window.addSafePoint = function addSafePoint(position) {
         var pointId = makeid();
-        var my_location = new L.circle(position, 70, {
+        var my_location = new L.circle(position, 30, {
           color: 'green',
           fillColor: 'green',
-          fillOpacity: 0.5,
+          fillOpacity: 0.4,
           className: pointId
         }).addTo(map);
 
@@ -98,10 +102,10 @@
 
       window.addDangerPoint = function addDangerPoint(position) {
        var pointId = makeid();
-       var my_location = new L.circle(position, 70, {
+       var my_location = new L.circle(position, 30, {
         color: 'yellow',
         fillColor: 'yellow',
-        fillOpacity: 0.7,
+        fillOpacity: 0.4,
         className: pointId
       }).addTo(map);
 
@@ -117,10 +121,10 @@
      window.addEmergencyPoint = function addEmergencyPoint(position) {
       var pointId = makeid();
       console.log("addEmergencyPoint", position)
-       var my_location = new L.circle(position, 100, {
+       var my_location = new L.circle(position, 30, {
         color: 'red',
         fillColor: '#f03',
-        fillOpacity: 0.7,
+        fillOpacity: 0.4,
         className: pointId
       }).addTo(map);
 
