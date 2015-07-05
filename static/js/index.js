@@ -2,6 +2,8 @@ var newMarker = null;
 var targetMarker = null;
 var socket = io.connect('http://govhack2015.gregdmd.com');
 
+var howIfeel = null;
+
 var peers = {};
 
 window.onload = function() {
@@ -14,11 +16,19 @@ window.onload = function() {
 
     layers[1].on('featureClick', function(e, latlng, pos, data, layerNumber) {
       targetMarker.setLatLng(latlng);
+      if (howIfeel == 'safe') {
+          addSafePoint(latlng);
+      };
+      if (howIfeel == 'unsafe') {
+          addDangerPoint(latlng);
+      };
+      if (howIfeel == 'emergency') {
+          addEmergencyPoint(latlng);
+      }
       socket.emit('user_click', { pos: latlng, id: socket.id } );
     });
 
     socket.on('user_click', function(msg){
-      console.log("socket!!");
       if (peers[msg.id]) {
         peers[msg.id].setLatLng(msg.pos);
       } else {
@@ -38,26 +48,41 @@ window.onload = function() {
         { pos: pos, id: socket.id }  
         );
     }
-    
+
+    window.feelingSafe = function(position) {
+      howIfeel = 'safe';
+      addSafePoint([position.coords.latitude,position.coords.longitude]);
+    };
+
+    window.feelingUnsafe = function(position) {
+      howIfeel = 'unsafe';
+      addDangerPoint([position.coords.latitude,position.coords.longitude]);
+    };
+
+    window.feelingInEmergency = function(position) {
+      howIfeel = 'emergency';
+      addEmergencyPoint([position.coords.latitude,position.coords.longitude]); 
+    };
+
     window.addSafePoint = function addSafePoint(position) {
-      var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
+      var my_location = new L.circle(position, 200, {
         color: 'green',
-        fillColor: '#f03',
+        fillColor: 'green',
         fillOpacity: 0.5
       }).addTo(map);
     }
 
     window.addDangerPoint = function addDangerPoint(position) {
-     var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5
+     var my_location = new L.circle(position, 200, {
+      color: 'yellow',
+      fillColor: 'yellow',
+      fillOpacity: 0.7
     }).addTo(map);
    }
 
    window.addEmergencyPoint = function addEmergencyPoint(position) {
     console.log("addEmergencyPoint", position)
-     var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 300, {
+     var my_location = new L.circle(position, 300, {
       color: 'red',
       fillColor: '#f03',
       fillOpacity: 0.7
