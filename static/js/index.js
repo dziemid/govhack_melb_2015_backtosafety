@@ -52,7 +52,7 @@ window.onload = function() {
         );
     }
     
-    function addSafePoint(position) {
+    window.addSafePoint = function addSafePoint(position) {
       var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
         color: 'green',
         fillColor: '#f03',
@@ -60,7 +60,7 @@ window.onload = function() {
       }).addTo(map);
     }
 
-    function addDangerPoint(position) {
+    window.addDangerPoint = function addDangerPoint(position) {
      var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 200, {
       color: 'red',
       fillColor: '#f03',
@@ -68,7 +68,8 @@ window.onload = function() {
     }).addTo(map);
    }
 
-   function addEmergencyPoint(position) {
+   window.addEmergencyPoint = function addEmergencyPoint(position) {
+    console.log("addEmergencyPoint", position)
      var my_location = new L.circle([position.coords.latitude,position.coords.longitude], 300, {
       color: 'red',
       fillColor: '#f03',
