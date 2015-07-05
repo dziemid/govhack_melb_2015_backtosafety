@@ -55,18 +55,22 @@ window.onload = function() {
     }
 
     window.feelingSafe = function(position) {
-      howIfeel = 'safe';
-      addSafePoint([position.coords.latitude,position.coords.longitude]);
+      feelingClickHandler('safe', position, addSafePoint)
     };
 
     window.feelingUnsafe = function(position) {
-      howIfeel = 'unsafe';
-      addDangerPoint([position.coords.latitude,position.coords.longitude]);
+      feelingClickHandler('unsafe', position, addDangerPoint)
     };
 
     window.feelingInEmergency = function(position) {
-      howIfeel = 'emergency';
-      addEmergencyPoint([position.coords.latitude,position.coords.longitude]); 
+      feelingClickHandler('emergency', position, addEmergencyPoint)
+    };
+
+    window.feelingClickHandler = function(feeling, position, fun) {
+      latlng = [position.coords.latitude,position.coords.longitude];
+      howIfeel = feeling;
+      fun(latlng);
+      socket.emit('user_click', { pos: latlng, id: socket.id, feeling: feeling} );
     };
 
     window.addSafePoint = function addSafePoint(position) {
